@@ -1,0 +1,34 @@
+import os
+import smtplib
+import imghdr
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+from email.message import EmailMessage
+EMAIL_ADDRESS = 'Mailid'
+EMAIL_PASSWORD = '<Password>'
+contacts = ['tomail']
+msg = MIMEMultipart()
+msg['Subject'] = 'Check out Bronx as a puppy!'
+msg['From'] = EMAIL_ADDRESS
+msg['To'] = 'toaddress'
+
+filename = "Sample.png"
+attachment = open("<>path", "rb")
+p = MIMEBase('application', 'octet-stream')
+p.set_payload((attachment).read())
+p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+# attach the instance 'p' to instance 'msg'
+msg.attach(p)
+
+
+
+
+
+
+
+
+with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+    smtp.send_message(msg)
