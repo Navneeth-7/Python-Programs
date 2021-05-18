@@ -1,0 +1,23 @@
+import requests
+import webbrowser
+
+su=dict()
+fa=dict()
+urls=["<url1>","url2"]
+for i in urls:
+    x = requests.get(i)
+    if (x.status_code == 200):
+        su[i]=x.status_code
+    else:
+        fa[i]=x.status_code
+print(f"Sucess URL:\n")
+for k,v in su.items():
+    print(k," : ",v)
+print(f"Failuer URLS:\n")
+for k,v in fa.items():
+    print(k," : ",v)
+
+
+for k,v in fa.items():
+    webbrowser.register('chrome',None,webbrowser.BackgroundBrowser("C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
+    webbrowser.get('chrome').open(k)
